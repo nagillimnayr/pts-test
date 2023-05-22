@@ -1,4 +1,4 @@
-import { CanvasSpace, Pt, Group } from 'pts';
+import { CanvasSpace } from 'pts';
 
 function main() {
   // create canvas element and add to the DOM
@@ -27,15 +27,21 @@ function main() {
 
   // create canvas space
   const space = new CanvasSpace('#canvas');
-  space.setup({ bgcolor: '#fff' });
+  space.setup({ bgcolor: '#aaa' });
 
   // create canvas form
   const form = space.getForm();
 
   // add player callback to space
-  space.add(() => {
-    form.point(space.pointer, 10);
+  space.add({
+    start: () => {},
+    animate: () => {
+      form.point(space.pointer, 20);
+    },
+    action: () => {},
   });
+
+  space.bindMouse().bindTouch().play();
 }
 
 window.addEventListener('load', main);
